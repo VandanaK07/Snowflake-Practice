@@ -1,0 +1,436 @@
+You need azure subscription for Azure use
+You need azure account 
+	-- azure.com
+	-- microsoft Representatives
+	-- Microsoft Partners
+On create of Azure account, you get an Azure Subscription, 
+	-- 200 USD credit, for first 30 days
+	-- Free Azure products for 12 months
+	-- Services lifetime free
+	
+Subscription 
+	-- logical unit consists of all resources and services you have bought
+	-- multiple/Additional subscription
+		-- billing management
+			-- Multiple subscriptions --> common one invoice --> one billing account
+			-- Multiple subscriptions --> multiple invoices --> multiple billing profiles --> one billing account
+		-- resource management
+
+	-- Organization's department management
+	-- Environments workloads --> Developemnt, testing, production
+	-- Express Route = 10/subscription
+	-- billing management --> Developemnt+ Testing billing separated from Production workloads
+
+Support
+	-- 24/7 free support
+		-- Online documentation
+		-- how-to-do videos
+		-- demo videos
+		-- forum
+		-- Microsoft Knowledge center -- all support related topics answered
+		-- Micorsoft Tech Community -- Azure technical questions answered by Azure Dev and Testers
+		-- Microsoft Q&A -- read responses on FAQs
+		-- Stack Over flow -- developer community
+		-- Server fault -- System + Admin related issue
+		-- Azure Feedback Forum -- suggestions/ feedback azure products
+		-- twitter --@azureSupport
+	-- Support Plans 
+		-- Developer
+			-- non critical workloads
+			-- 1 business day reponse time
+			-- no proactive tech support
+		-- Standard
+			-- Production workloads
+			-- 1-hour response time
+			-- no proactive tech support
+		-- Professional Direct
+			-- Business- critical workloads
+			-- 1 hour reponse time + priority critical issues tracking
+			-- tech experts help
+	
+	
+	
+	
+======================================Data storage============================================
+
+Structed data
+	-- Relational data
+	-- predefined schema with rows and column
+Semistructed data - 
+	-- NoSQl data, non-relational data
+	-- No schema
+UnStruted data
+	-- No schema
+	-- Large files
+	
+	Azure SQL database
+		-- bsaed on database engine of MSSQL server
+		-- Migration from on-prem SQL Server to SQL database
+		-- Azure Databse migration Service
+				-- uses Microsoft Data Migration Assistant
+				
+	Azure Cosmos DB
+		-- NoSQl Data, Schema Less
+		-- Global users' data
+		-- Frequently changing data
+		-- Distributed storage and data access
+	
+	Blob Storage
+		-- Unstructured data
+		-- Large size data
+		-- Audio, video, Binary files, JSON, PDF, images
+		-- Access data from Blob storage using browser
+		-- Upto 8TB of data can be stored
+	
+	Data Lake Storage	
+		-- Perform Analytics and holds reporting data
+		-- Its a repository for unstructed and structured data
+		
+	Azure Files
+		-- Managed file shares in the cloud
+		-- Accessible via SERVER MESSAGE BLOCK protocol
+		-- SMB ensures data encrytion
+	
+	Azure Queue
+		-- Store large no of Messages
+		-- Accessed Globally
+		
+	Disk Storage
+		-- Restrict outside data accessed
+		
+	Encryption 
+		-- Client Side encryption
+		-- Azure Storage service Encryption
+		
+	Azure storage has built in Storage tier,				data replication and encryption available
+								-- Hot storage Tier
+								-- cold storage tier
+								-- Archieve storage tier
+	
+	
+	================================Networking options========================================
+	
+	Azure Network ---> Region level
+		-- Virtual Network ---> Group of VMs level -->
+			-- Subnet ---> Individual VM or resource level --> Networok Security Group(NSG)
+			
+	Subnet --> VM level
+	Virtual network --> scope is region
+	multiple virtual network talk to each other using VIRTUAL NETWORK PEERING -- VPNs
+	
+	Web cloud ---> Application cloud ---> Data cloud	===> Virtual Network	
+	Web cloud (Virtual network) --> app onprem --- data on-prem	-===> webtier virtual network to on-prem n/w --> Express Route for Private connection 
+																												b/w on-prem and cloud-- optic fibre connection
+	
+	HIgher to lower tier access is possible
+	Lower to higher tier access is not possible
+	
+	USer --- public Ip -- Web tier -- private Ip -- app tier -- private ip --- data tier
+	
+	Azure Load balancer -- all tier in cloud, when VMs for scaleup are @same region
+	Application Gateway -- some in cloud, some at on-prem, but make use of Azure load balancer at some layer -- Load balancer+WAF(Web application Firewall)
+	
+	Traffic manager --> DNS based service, Low latency purpose, when VMs are at different regions -- connects you to the nearest responsive endpoint 
+	Latency - time taken by data to travel over the network
+	Bandwidth -- amount of data travel in a connection
+	
+	==================== Security =============================
+	
+	Azure Cosmos DB -- Paas
+	Microsoft 365 - Saas
+	VMs - Iaas
+	
+	Defense in Depth==>	Physical(Personnel security) --> Identity & Access(AuthN and AuthZ) --> Perimeter(DDos, Firewall) --> Network(NSGs, ASGs) --> VM/compute(SSO, MAF) --> Software/App(SSO) --> Data(Encryption)
+	
+	Physical+Perimeter+firewalls --> useful when you have data @datacenter and someone is trying to enter the prem
+	Identity+etc === when you are accessing resources digitally
+	
+	Identity(Accounts), Access -- Azure Active Directory
+	Keys, secrets, certs --> Azure Key Vault
+	Networks types security methods -- Azure Security Center
+	Resource, Subscription, RGs, MGs -- Azure Resource Manager
+	
+	Azure Security center -- Security as a Service
+		-- monitoring service that provides threat protection across all of your services for cloud and on-prem
+		-- part of the Center for Internet Security (CIS) recommendations.
+		-- Available in Free and standard tier
+		-- Use standard tier for more facilities and security
+		-- 30 days free trial for standard tier
+		-- after that $15 per node per mont
+		-- Used in your workflow for Incident response at Detect(high-priority security alert), Assess and diagnose
+		-- used for enhanced security using Security policy @Subscription level
+		
+	Identity and Access : who you are -- identity - Authentication (uname, password, SSO, MFA)
+						: what you can do -- Access - Authorization(RBAC, AZure Policy)
+						-- Credentials of an Identity are stored in a Configuration files(need to secure these files as well)
+	AuthN & AuthZ --> managed by Azure Active Directory
+		Azure AD -->
+			-- Identity as a Service
+			-- AD provides services like
+				-- AuthN
+				-- SSO -- One ID and one Password
+				-- B2B identity service
+				-- B2C Identity Service
+				-- App Management (Micorsoft Auth App)
+				-- Device Management (Mobile No)
+				-- MFA
+				
+	MFA - Multi factor AuthN
+		-- what you know -- password or security Question
+		-- what you possess -- mobile device for AuthN notification or RSA token
+		-- who you are -- biometrices like face, Eye, Fingerprint
+		
+	Credentials of an Identity are stored in a Configuration files(need to secure these files as well)
+		--AD handles this problem using:
+			-- Service principals
+				Identity -- AuthN
+				Principal - your Role
+			-- Managed identities for Azure services
+				-- you can create for any azure service
+				-- when you create Managed Identity, you create an account on Azure/Org active directory
+	
+	Role based Access control - RBAC
+	
+	Encryption -- Last and strongest line of Defense
+		-- when data @rest --> defense in Depth security
+		-- when data @transit --> only encryption is the security
+	
+	-- Symmetric encryption - same key is used for encryption and decryption
+	-- Asymmetric Encryption -- public + private key for encryption and public + new private key for decryption
+	
+	-- Encryption at Rest
+	-- Encryption at transit
+	
+	
+	** Encryption of Data @Rest
+	Storing data itself in Disks,blob, file server, queue etc --> Azure Storage Service Encryption
+	VHD, virtualhard disk(on cloud) --> Azure Disk Encryption Service
+									-- Manage and control disk encryption Keys and Secrets using Azure Key Vault
+	Database Encryption --> Tranparent Data Encryption Service
+					
+	Securing keys, secrets(password, connection String etc) --> stored in Azure Key Vault
+	Azure Key Vault -
+		-- Key management
+		-- Secret Management
+		-- Certificate Management
+		-- Store secrets backed by Hardware Security Modules
+	
+	
+	** Encryption of Data @Transit
+		-- uses Transport layer security TLS
+			-- Uses Certificate for encryption and decryption
+			-- Have a life cycle, they expire also
+			-- CA's trusted certs and Self-signed Certs
+			
+	Type of Certs:
+		-- Service Certificate -- used for cloud service
+							-- specific to Services
+		-- managment certificate -- used for AuthN using Mngmnt API
+							-- Azure Key Vault -- not only manages Certificates but also,
+														-- can create new and Import existing one
+														-- control and manage certs without private key needed
+														-- manage notification for life cycle of certs -- expiration and renewal
+															
+							
+	Not only Perimeter or inside n/w need to be secured, but Network must be secured
+	Look for inbound and outbound traffic
+	Azure security Center	--- checks if internet facing resources are secured using NSGs or not	
+							--- checks if resources are secured behind firewall or not
+	Firewall:
+		-- based on source IPs, defines the rules for access the server
+	NSGs -- Destination IP based service
+	ASGs --Destination role based service
+						
+						
+	group of VMs in cloud secured using Virtual Network
+	group of physical servers in on-prem secured using VPN
+		to talk to each-other Virtual network <---> VPN ==> ExpressRoute
+		
+	Shared Document protection --> Micorsoft Azure Information Protection
+	
+	Threat Protection -- Azure Advanced Threat Protection service --
+							-- Detects known threats, attacks, techniques etc
+							-- Compoenets of ATP:
+								-- ATP  Portal
+								-- ATP Sensor
+								-- ATP cloud service
+								
+		
+		
+		
+	====================== Managing resources ======================
+	Azure Subscription
+		|		-- Pay-as-go-model
+		|		-- Enterprise Agreement(EA)
+	   \ /
+	   Resouce Groups
+			|
+			|
+		   \ /
+		   Resources
+		  
+	Resource groups contains resources inside
+	we can create RGs
+	Can add Resource inside it
+	Secured using RBAC - role base access control security method
+	One resource, member of one RG, cant be part of another RG
+	Should follow naming convention while creating RG or resources.
+	Organize resources in a Gruoup:
+		Strategy says organize by :
+				-- environment , type, size, locations, depatmentwise etc
+				
+		Resource Tags
+				-- multiple tags for a resource
+				-- tags are at resource level	
+				-- tags are not inherited and applied to resource level
+		Azure Policy -- helps you create, assign and manage policy(s) to your resource group
+					 -- Policy is applied for a resource at a resource Group level
+					 -- Policy name, descirption, rule , then create
+					 -- we apply it to our resource group in a subscription for the existing and new resources in our same RG.
+					 -- Create Policy, Assign Policy, Test Policy, manage Policy
+					 -- Creating a new resource is a Deployment.
+		RBAC 
+			-- comes with no cost
+			-- at RG level , you can apply RBAC
+			-- secure critical resources using Resource locks from accidental deletion or modifications
+			-- RBAC can be @IAM - Access management
+			-- applied to RG level
+			-- can be applied to Management group level as well
+				-- permitted user will have access to all the subscriptions and RGs, resources under this MG, 
+		Resource Locks
+			-- prevent deletion/modification
+			-- Delete and Read-Only
+				-- Delete blocks the delete
+				-- Read-Only allows only read only access.
+			-- inherited from subscription to lower levels
+			-- can be applied to subscription, resource group, resource
+					
+					
+============================ IT Governance and Compliance ===================
+Azure Poliy and RBAC are different
+Azure policy 
+	-- a service which you create, assign, test/validate
+	-- can be assigned from subscription level to resource
+	-- if applied at higher level, can be inherited by all child
+Initiatives
+	-- when the policies are large in no, to manage them, you need initiatives
+	-- it is set or group of azure policy
+	-- Initiative definition is a set/group of policy definitions
+	-- like policy assignment, initiative assignment scope -- from Management group to resource group
+Access management
+	-- occurs at Subscription level
+Management Group
+	-- at the top in the hierarchy
+	-- manage access, policy, compliance at multiple subscriptions
+	-- Root management Group 
+		|
+		|
+	   \ /
+		Management groups -- any rule created here will also be applied to subscription under this specific Management Group
+			|
+			|
+		   \ /
+		   Subscriptions
+		
+		-- Access, policy, compliance, applied at higher level in hierarchy inherited by all the child down the hierarchy
+		-- First Management group you add will be added as ROOT management group--> Tenant management group
+		-- upto 6 levels of hierarchy is possible excluding root management group and subscriptions
+		-- upto 10,000 management groups can be created for an Organization
+		
+	
+	
+	PaaS
+		-- App Service -- developer Friendly Model
+		-- Web app
+		-- logic app
+		-- Database
+		-- Azure Data Warehouse (now known as Azure Synapse Analytics)
+		
+	IaaS
+		-- VMs
+		-- Storage Account
+		-- Container
+	
+		
+	-- SQL Data Warehouse offers an availability SLA of 99.9%
+	-- Availability zone
+	
+	
+	Azure AD tenant can have multiple subscriptions but an Azure subscription can only be associated with one Azure AD tenant.
+	Resource can have multiple delete locks
+	Resouce inherits locks from RGs
+	multiple locks can be apply to a resource	
+	You can use Power BI to analyze and visualize data stored in Azure Data Lake and Azure SQL Data Warehouse.
+	
+	to create VM --> you cant use
+						-- Bash in cloud shell in Android Laptop
+						-- PowerApps 
+						
+			data disk storage on VM --> Azure Blob Storage
+			
+	There are two storage services IoT Hub can route messages to: Azure Blob Storage and Azure Data Lake Storage Gen2 (ADLS Gen2) accounts.
+	Azure Data Lake Storage accounts are hierarchical namespace-enabled storage accounts built on top of blob storage.
+	Datalake is used to process large amount of data and perform analytics on top of that. It is not used by transaction purpose. Once you get IoT data in queue, you can push it to datalake for further analysis purpose
+	
+	Azure Firewall doesn't protect from attacks, only filter traffic at layer 3 and layer 7, so DDoS is the correct answer.
+	Firewall and DDOS both sends events to Azure Monitor.
+	
+	If you want to raise the limit or quota above the default limit, open an online customer support request at no charge.
+	
+	After you apply tags, you can retrieve all the resources in your subscription with that tag name and value. Tags enable you to retrieve related resources from different resource groups. This approach is helpful when you need to organize resources for billing or management.
+	
+	I found this: Enterprise Agreement (EA) customers can purchase Azure Standard, ProDirect and Premier technical support through their Reseller. Developer Support is not available through an Enterprise Agreement.
+	
+	A resource group has not an Admin, only a subscription can have and admin
+	
+	"Monthly Uptime Percentage" for Virtual Machines in Availability Zones is calculated as Maximum Available Minutes - Downtime divided by Maximum Available Minutes in a billing month for a given Microsoft Azure subscription. Monthly Uptime Percentage is represented by the following formula:
+
+	Monthly Uptime % = (Maximum Available Minutes – Downtime) / Maximum Available Minutes X 100
+	
+	Availability Zones, Azure offers industry best 99.99% VM uptime SLA
+	
+	Database Engine and patched OS with 99.99% availability.
+	
+	Azure Data Warehouse (now known as Azure Synapse Analytics) is a PaaS offering from Microsoft. As with all PaaS services from Microsoft, SQL Data
+	Warehouse offers an availability SLA of 99.9%. Microsoft can offer 99.9% availability because it has high availability features built into the platform.
+	
+	A Local Network Gateway is an object in Azure that represents your on-premise VPN device. A Virtual Network Gateway is the VPN object at the Azure end of the
+VPN. A "˜connection"™ is what connects the Local Network Gateway an the Virtual Network Gateway to bring up the VPN.
+
+You need to check notifications of failure,that should be only Azure Monitor
+
+Azure Monitor maximizes the availability and performance of your applications by delivering a comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments. It helps you 
+
+understand how your applications are performing and proactively identifies issues affecting them and the resources they depend on.
+
+
+		NSG just block or open a port, Azure Firewall can "limit the amount of traffic", because it's a stateful firewall. So the answer is Azure Firewall
+		
+		Correct answer and only option is Help+Support
+It asks " view a list of planned maintenance events", not to configure alerts (Service Health).
+
+	Subscription is a funcdamental billing UNit
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

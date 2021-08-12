@@ -1,0 +1,140 @@
+Snowflake Interview Questions .v1
+
+ EMPENOFORE:
+
+	1. How do you manage the security in Snowflake. What encryption do you use to secure your Snowflake account? Any third-party encryption tool or Snowflake in-built?
+	
+	2. you have a User: KUMV0012 - user name,
+	The same user is assigned two different Role:
+			1. HR_ROLE - having access only to schema having HR related data
+			2. MKT_ROLE - having access only to schema having MARKETING related data
+	Condition: Both the roles assigned to same user but you are not allowed to grant privilege to each-other role.
+	Now, this one USER wants to access the data of both HR and MARKETING schema at the same time in a same query.
+	e.g. you logged in with HR role and running the below query will throws error:
+		SELECT ID, NAME FROM DB1.SCHEMA_HR.TBL1
+		JOIN DB2.SCHEMA_MKT.TBL2
+		ON COL1 = COL2
+	How will you see the data of both tables with one single role.
+	
+	3. How will you clone a database from PROD to DEV environmnet, without getting the privileges of database level but getting all the child db objects and their privileges.
+	
+	4. what data model you use in your datawarehouse?e.g. Kimball, Inmon, data vault.
+
+	5. what fact tables your project?
+	
+	5. what are SNOWFLAKE features you think are out of the box?
+	
+	6. do you use zero-copy cloning, Time-travel and Fail-safe? Can you configure Fail-Safe Period?
+	
+	7. As an Admin you created a Custom-role in the hierarchy, same to level of SYSADMIN. Will SYSTEM be able to access everything what that custom role will have?
+
+	
+	
+EMERSON:
+	
+	1. What transformation you used in IICS in your data.
+	2. What is lookup in IICS? How do you run an SQL in IICS?
+	
+	3. what is search Optimization in Snowflake?
+	
+	4. what are materialized views and how to implement them? what is their purpose?
+	
+	5. If you doing an aggregation and group by on a column which has NULL Value, how does snowflake handles that?
+	
+	6. Does snowflake stores data in Temp file internally in aggregated form?
+	
+	7. what is clustering and how will you decide a clustering column.
+	
+	8. what are caches and how do you use cache in Snowflake?
+	
+	9. what is Group by and Group Roll up in snowflake?
+	
+	10. Two	different users with two different roles, trying to retrieve data from same table and same query. Will they make use of Result Cache?
+	
+	11. what Agile methodology you use in your project?
+	
+	12. what are the various ways of scheduling the tasks? how to schedule task at a specific time and how to use cron?
+	
+	13. what are streams? do they capture delete as well?
+	
+	
+HCL:
+
+	1. what all steps you follow to migrate an on-prem to on cloud datawarehouse
+	
+	2. difference between MPP and distributed processing
+	
+	3. you have three different sources sql server, excel, json , what you will you perform to load all the sources to a cloud storage?
+	
+	4. what are dimensions, junk and conformed dimensions, what are facts?
+	
+	5. how to design an ETL job to do data migration?
+	
+	6. what are data pipelines you worked upon?
+	
+	
+	
+	
+--****************************************************************************************** 8---------------
+
+Best Practices in SF :
+VW management:
+	Scale up -- query performance increase, parallel execution enable if loading multiple files to a single tables
+	scale out -- handle concurrent users and query 
+	
+	Start with right -sizing --
+	Linear Scaling -- query per tuning -- bcz they are cost neutral
+	Auto resume and suspend -- cost saving
+	
+Cost Management:
+	Compute	cost -- VWH
+	Storage cost -- Table(perm, transient, temp -- tt, fs), Matr views, stages--internal
+	Services cost -- PIpe
+	data transfer cost - cross region
+	
+	Saving: Resource Monitors -  accountlevel, warehouse level
+			TT -- Enterprise -- TT-0-90, as per requi configure TT period, instead of tt, use copy cloning for backup of data
+			utilize temp tables for session specific storage,|| use trasient tables, for  staging where you do a trunacte and load
+			
+Security : layered:
+				Network -- ip allowed list
+				Account -- SSO, MFA, 
+				Object -- Use roles and privileges
+				Data -- Encryption, periodic rekeying
+					MFA -- DUO security -- reco for ACCOUNTADMIN roles
+					Federated Auth + SSO -- SSO + OKTA verfication
+					Role management - system defined roles
+
+So we use Snowflake for ELT purpose and Informatica cloud for ETL in different requirements.
+There are various challanges we faced like query optimizations, security related concerns, cost optimizations as well.
+
+
+security related concerns - Dynamic data masking
+ for Continuous data loads - we in some requirements we have Snowpipe, in some cases we have used stored procedures with Streams
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+

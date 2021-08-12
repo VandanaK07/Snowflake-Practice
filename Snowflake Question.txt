@@ -1,0 +1,47 @@
+1. Snowflake Architecture and it's various components
+2. Data loading and challenges faced
+3. Data loading include copy command, how do you create stages, various stage - table/internal/external.
+4. How does stages differ from each other.
+5. How to create external stage referencing S3 bucket/ADSL
+6. Scenarios like how do you handle duplicates as integrity constraints are not enforced in SF.
+7. What are warehouses and how do you design it.
+8. Performance optimization - Auto Scaling, Caching and clustering
+9. Scenarios where you have used time travel feature.
+10. UDF and how have you used it.
+11. Restrictions in SF as compared to RDBMS database.
+12. If you have worked on migration what are challenges faced and how did you overcome it.
+13. Task, streams implementation scenario.
+14. Structured/semi- structured files how have you loaded them.
+15. Volume of data you have handled.
+16. Architecture of your project.
+17. Orchestration of SF pipelines - tools being used for it.
+18. How do you handle transactional transactions in Snowflake.
+19. Snowpipe
+20. Data Unloading.
+21. Role based access management - important to have knowledge on this.
+22. How does normal views and materials views differ in Snowflake
+23. Difference between copy and put command.
+24. Steps involved in creation of stages.
+25. Different type of stages.
+26. Rejected/bad records- how to view them.
+27. Considering a scenario where you need to load files as soon as it arrives, how would you implement it.
+28. Loading semi structured data - through variant column.
+29. How does snowflake always load the incremental data files ignoring the ones already loaded.
+30. How would you force to load all the files in a given folder/directory.
+31. Can you query data on external storage without loading them, if yes how ?
+32. Bulk vs Continuous loading.
+33. Size of warehouse in project and how did you decide it.
+34. When do we require to use multi-cluster and auto-scaling warehouses.
+35. How does a multi cluster warehouse setup works.
+36. Different types of caching in Snowflake.
+37. Is a warehouse and database dependent on each other.
+38. Can a warehouse be mapped to different databases.
+39. Two modes in which a multi-cluster warehouse can run.
+40. Idea on snowflake warehouse pricing.
+41. How do define role access control on warehouse.
+42. Auto suspension and auto resumption
+43. Monitoring warehouse load - good to know.
+44. How is Virtual warehouses and storage independent of each other ?
+45. How does a query processing happen on a warehouse.
+46. Does virtual warehouse share resources with other warehouses ?
+47. When you resize a warehouse how does it affect any running query in process using it.

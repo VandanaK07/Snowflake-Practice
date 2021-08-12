@@ -1,0 +1,104 @@
+Create And Alter Table
+Unique, Check, Foreignkey, Primary Key, Identity, Default Constraints
+Cascading Referential Integrity
+UNION And UNION ALL
+Normalization 1NF, 2NF And 3NF
+Null Replacement: ISNULL(), COALESCE()
+GROUP BY And ORDER BY
+Simple And Advanced Joins
+CAST And CONVERT
+Global And Local Temporary Table
+Stored Procedures With Input, Output Params And Return Value
+Scalar, Inline Table, Multi Statement Table Functions
+Clustered, Non Clustered, Unique, Non Unique Indexes
+Updateable, Indexed Views
+After, InsteadOf Triggers
+Views/Temptable/Tablevariable/Derivedtable/CTE
+Derived Table, Common Table Expressions, Updateable CTEs, Recursive CTEs
+Subqueries
+Subquries VS Joins
+Cursors
+Re-Runnable Query
+Merge in SQL
+SELECT INTO , INSERT INTO SELECT
+WHERE vs HAVING
+Windows Function
+Dynamic SQL
+Difference Control flow and data flow
+Variable
+Difference delete and truncate
+STUFF, replace
+
+
+
+Transactions And ACID Test
+column store index
+transaction and transaction type
+difference b/w unicode and non unicode
+Event handler
+ansi sql, quote identifier, for xml path
+
+
+stored procedure and function difference - FUnctions can be used in Select and where clause
+union and union all syntax - schema and col order must be same
+temp tables - global and local 
+Inline function - returns table
+Function type - Inline, multiValued, Scalar
+ISNULL() and coalesce() function difference - get null replacement whereas, get first not null value
+syntax stored proc - simplicity of writing complex queries
+Identity column - auto incremental
+how many clustered and non clustered index on a table - one clustered index and 
+indexes - clustered, non clustred, unique, non-unique
+Derived tables - temp resultset, alternative to Views
+Join o/p with Duplicate values
+
+
+
+temp variable and syntax and why it is better from temp table
+temp table and temp variable syntax - temp table is table,
+Views and Views type - 
+column store index
+CTE and nested CTE
+Difference Control flow and data flow
+Variable
+Views and Views type
+transaction and transaction type
+Difference delete and truncate
+difference b/w unicode and non unicode
+Event handler
+Merge in sql
+windows function in sql
+ansi sql, quote identifier, for xml path, STUFF, replace 
+
+
+********************************************** +++++++++++ *******************************************
+
+count_if()
+Performance optimization
+RDBMS is different from Snowflake
+junk dimension
+star and snowflake schema
+Inmon, Kimball, data Vault
+
+RDBMS - 3NF -- inmon
+
+star schema --- Kimball
+
+hybrid of -- data vault 2.0
+
+airflow
+
+Type of Azure blob
+block
+page -- paging operation, VM disk and sql backups
+append -- 
+3 tiers - hot cold 
+
+
+
+storage int --- 
+notification int
+
+azure ----- SF
+
+

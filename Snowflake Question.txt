@@ -1,47 +1,174 @@
-1. Snowflake Architecture and it's various components
-2. Data loading and challenges faced
-3. Data loading include copy command, how do you create stages, various stage - table/internal/external.
-4. How does stages differ from each other.
-5. How to create external stage referencing S3 bucket/ADSL
-6. Scenarios like how do you handle duplicates as integrity constraints are not enforced in SF.
-7. What are warehouses and how do you design it.
-8. Performance optimization - Auto Scaling, Caching and clustering
-9. Scenarios where you have used time travel feature.
-10. UDF and how have you used it.
-11. Restrictions in SF as compared to RDBMS database.
-12. If you have worked on migration what are challenges faced and how did you overcome it.
-13. Task, streams implementation scenario.
-14. Structured/semi- structured files how have you loaded them.
-15. Volume of data you have handled.
-16. Architecture of your project.
-17. Orchestration of SF pipelines - tools being used for it.
-18. How do you handle transactional transactions in Snowflake.
-19. Snowpipe
-20. Data Unloading.
-21. Role based access management - important to have knowledge on this.
-22. How does normal views and materials views differ in Snowflake
-23. Difference between copy and put command.
-24. Steps involved in creation of stages.
-25. Different type of stages.
-26. Rejected/bad records- how to view them.
-27. Considering a scenario where you need to load files as soon as it arrives, how would you implement it.
-28. Loading semi structured data - through variant column.
-29. How does snowflake always load the incremental data files ignoring the ones already loaded.
-30. How would you force to load all the files in a given folder/directory.
-31. Can you query data on external storage without loading them, if yes how ?
-32. Bulk vs Continuous loading.
-33. Size of warehouse in project and how did you decide it.
-34. When do we require to use multi-cluster and auto-scaling warehouses.
-35. How does a multi cluster warehouse setup works.
-36. Different types of caching in Snowflake.
-37. Is a warehouse and database dependent on each other.
-38. Can a warehouse be mapped to different databases.
-39. Two modes in which a multi-cluster warehouse can run.
-40. Idea on snowflake warehouse pricing.
-41. How do define role access control on warehouse.
-42. Auto suspension and auto resumption
-43. Monitoring warehouse load - good to know.
-44. How is Virtual warehouses and storage independent of each other ?
-45. How does a query processing happen on a warehouse.
-46. Does virtual warehouse share resources with other warehouses ?
-47. When you resize a warehouse how does it affect any running query in process using it.
+============== Snowflake Questionaree =======================
+1. What is snow pipe ?
+Snowpipe enables loading data from files as soon as they’re available in a stage. This means you can load data from files in micro-batches, 
+making it available to users within minutes, rather than manually executing COPY statements on a schedule to load larger batches.
+
+2. What is virtual warehouse and it's use in snowflake ?
+A virtual warehouse, often referred to simply as a “warehouse”, is a cluster of compute resources in Snowflake. A warehouse provides the required resources,
+such as CPU, memory, and temporary storage, to perform the following operations in a Snowflake session:
+Executing SQL SELECT statements that require compute resources (e.g. retrieving rows from tables and views).
+Performing DML operations, such as:
+Updating rows in tables (DELETE , INSERT , UPDATE).
+Loading data into tables (COPY INTO <table>).
+Unloading data from tables (COPY INTO <location>).
+
+3. What is Stage ? How to create it ? Types of stages available ?
+For Temporary Storage -- Internal and External Stage
+Stages available in Clouds -
+Azure 
+AWS
+GCP
+
+ CREATE OR REPLACE STAGE "Stage_Fact_Jira"
+  url = 'azure://povbidwsa.blob.core.windows.net//'
+  credentials = (azure_sas_token=
+'');
+
+4. How to maintain History and till what time history will be available ?
+
+5. How to schedule Stored Procedure ? What is task and how to schedule task?
+Through Task we can schedule the Store Procedure
+
+6. What is Shares ? What is Inbound and Outbound Share ?
+https://docs.snowflake.net/manuals/user-guide/data-sharing-intro.html
+
+7. How to clone db/schemas/ table ?
+create database mytestdb_clone clone mytestdb;
+
+8. What is the default role and existing roles available in snowflake ?
+Default role -- Security Admin 
+
+Roles available in Snowflake -
+Account Admin
+SysAdmin
+PUBLIC
+SecurityAdmin
+
+9. Where we can see Tables, Views, Schemas, Stages, File Formats, Sequences
+Click on Databes then click on Database name and inside that you will be able to see all the objects
+
+10.What is the role of AccountAdmin ?
+It's like Admin. AccountAdmin will be able to do anything on snowflake account
+
+11.Where we run Queries in snowflake
+In worksheets we need to run the Query
+
+12.How we can usage ?
+In Account Admin Role -- In Account Section we can the usage credit on daily basis for the Month
+
+13.How to create Users and what are the details required for the same ?
+In Account Admin Role -- In Account Section we can create user with nick name and mail id's.
+
+14.Do we create more roles ?
+In Account Admin Role -- In Account Section we can can create Role and we can select the parent Role type.
+
+15.Is it possible to monitor the Resource and How we can achieve this ?
+CREATE RESOURCE MONITOR "NOTIFY_CREDITUSAGE" WITH CREDIT_QUOTA = 40, frequency = 'MONTHLY', start_timestamp = 'IMMEDIATELY', end_timestamp = null 
+ TRIGGERS 
+ ON 100 PERCENT DO SUSPEND 
+ ON 90 PERCENT DO SUSPEND_IMMEDIATE 
+ ON 100 PERCENT DO NOTIFY;
+ALTER ACCOUNT SET RESOURCE_MONITOR = "NOTIFY_CREDITUSAGE";
+
+16.How to create Reader Account and how we can utilize that ?
+https://www.snowflake.com/blog/get-ready-for-snowflake-data-sharing-reader-accounts/
+
+17.What is Policies and how we can use Policies ?
+Adding new IP Addresses and Blocking Addresses
+
+18.How to connect Snowpipe to Azure Blob Storage and what are the steps required to setup?
+
+19.Syntax of snowpipe , stage, file format?
+CREATE [ OR REPLACE ] FILE FORMAT [ IF NOT EXISTS ] <name>
+                      TYPE = { CSV | JSON | AVRO | ORC | PARQUET | XML } [ formatTypeOptions ]
+                      [ COMMENT = '<string_literal>' ]
+
+
+20.Syntax fo Stored Procdedure, View?
+CREATE OR REPLACE PROCEDURE GetCustomer ()
+RETURNS varchar
+LANGUAGE Javascript
+AS
+$$
+    var sql_text =
+      `INSERT INTO table1 
+           SELECT * from "PRODUCTS" ;`
+    
+    var v_stmt_update_gennumber = snowflake.createStatement({sqlText: sql_text});
+      v_stmt_update_gennumber.execute();
+$$;
+21.What is Secured View ?
+https://docs.snowflake.net/manuals/user-guide/views-materialized.html
+
+22.What is Informtaion Schema ?
+https://docs.snowflake.net/manuals/sql-reference/info-schema.html
+23.Syntax to grant role to any object?
+
+grant ownership on table "Dim_Cost_Center" to SYSADMIN copy current grants
+
+grant ownership on all tables in schema "MANHATTAN_ASSOCIATES_ODS_DB"."PUBLIC" to SYSADMIN copy current grants;
+
+24. Syntax for Task
+CREATE OR REPLACE TASK SP_Cost_Center
+    WAREHOUSE = MANH_PoV_WH
+  SCHEDULE = 'USING CRON */5 * * * * UTC'
+  TIMESTAMP_INPUT_FORMAT = 'YYYY-MM-DD HH24'
+as
+  CALL SP_Upsert_Dim_Cost_Center();
+
+25. How to see status of Task ?
+  select Task_Status$(SP_Upsert_Dim_Date);
+  
+26. How to Execute Task ?
+  
+    show tasks;
+  
+  ALTER TASK SP_Execution RESUME | SUSPEND
+  
+  Use role securityadmin;
+
+CREATE role taskadmin;
+
+-- set the active role to ACCOUNTADMIN before granting the EXECUTE TASK privilege to the new role
+USE role accountadmin;
+
+GRANT EXECUTE task ON account TO role taskadmin;
+
+-- set the active role to SECURITYADMIN to show that this role can grant a role to another role
+USE role securityadmin;
+
+GRANT role taskadmin TO role sysadmin;
+
+
+ 27. Syntax of Snowpipe ?
+  CREATE OR REPLACE pipe "SNOWPIPE_DEMO"."PUBLIC"."DEMO_PIPE"
+  auto_ingest = true
+  integration = 'SNOWPIPE_DEMO_EVENT'
+  as
+  copy into "SNOWPIPE_DEMO"."PUBLIC"."EMPLOYEE"
+  from @"SNOWPIPE_DEMO"."PUBLIC"."DEMO_STAGE"
+  file_format = (type = 'CSV');
+ 
+ 28. Sytnax for notification ?
+ create notification integration SNOWPIPE_DEMO_EVENT
+  enabled = true
+  type = queue
+  notification_provider = azure_storage_queue
+  
+  Show integrations; 
+  drop integration SNOWPIPE_DEMO_EVENT
+  
+  DESC notification integration SNOWPIPE_DEMO_EVENT;
+  
+ 29 . Refresh Pipe ?
+ 
+  ALTER PIPE "SNOWPIPE_DEMO"."PUBLIC"."DEMO_PIPE" REFRESH;
+  
+  30. How to see data from Stage ?
+  SELECT $1 from @"Stage_Fact_Jira"
+
+ 30. Miscelleneous Commands ?
+ 
+CREATE TABLE new_table LIKE old_table COPY GRANTS;
+INSERT INTO new_table SELECT DISTINCT * FROM old_table;
+ALTER TABLE old_table SWAP WITH new_table;
